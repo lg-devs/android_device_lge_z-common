@@ -14,18 +14,18 @@
 # limitations under the License.
 #
 
+# Call common vendor
+$(call inherit-product-if-exists, vendor/lge/z-common/z-common-vendor.mk)
+
 # Overlays
 DEVICE_PACKAGE_OVERLAYS := $(LOCAL_PATH)/overlay
+
+# System properties
+-include $(LOCAL_PATH)/system_prop.mk
 
 # Fall back to lower resolution if xhdpi bitmaps dont exist
 PRODUCT_AAPT_CONFIG := normal hdpi xhdpi xhdpi
 PRODUCT_AAPT_PREF_CONFIG := xhdpi
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/ramdisk/init.z.rc:root/init.z.rc \
-    $(LOCAL_PATH)/ramdisk/init.z.usb.rc:root/init.z.usb.rc \
-    $(LOCAL_PATH)/ramdisk/ueventd.z.rc:root/ueventd.z.rc \
-    $(LOCAL_PATH)/ramdisk/fstab.z:root/fstab.z
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/audio_policy.conf:system/etc/audio_policy.conf \
@@ -109,32 +109,6 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \
     frameworks/native/data/etc/android.hardware.nfc.hce.xml:system/etc/permissions/android.hardware.nfc.hce.xml
 
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sf.lcd_density=320 \
-	ro.opengles.version=196608
-
-# Audio Configuration
-PRODUCT_PROPERTY_OVERRIDES += \
-	persist.audio.handset.mic.type=digital \
-	persist.audio.dualmic.config=endfire \
-	persist.audio.fluence.voicecall=true \
-	persist.audio.fluence.voicerec=false \
-	persist.audio.fluence.speaker=false \
-	audio.offload.buffer.size.kb=32 \
-	audio.offload.gapless.enabled=false \
-	av.offload.enable=true
-
-# Radio
-PRODUCT_PROPERTY_OVERRIDES += \
-	persist.radio.apm_sim_not_pwdn=1 \
-	ro.telephony.call_ring.multiple=0 \
-	persist.radio.mode_pref_nv10=1 \
-    ro.telephony.ril_class=LgeLteRIL \
-	ro.telephony.ril.config=qcomdsds
-
-# Up to 3 layers can go through overlays
-PRODUCT_PROPERTY_OVERRIDES += persist.hwc.mdpcomp.enable=true
-
 PRODUCT_TAGS += dalvik.gc.type-precise
 
 PRODUCT_PACKAGES += \
@@ -186,39 +160,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 	hwaddrs
 
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-	rild.libpath=/system/vendor/lib/libril-qc-qmi-1.so
-
-PRODUCT_PROPERTY_OVERRIDES += \
-	drm.service.enabled=true
-
-PRODUCT_PROPERTY_OVERRIDES += \
-	ro.bt.bdaddr_path=/data/misc/bdaddr
-
-PRODUCT_PROPERTY_OVERRIDES += \
-	wifi.interface=wlan0 \
-	wifi.supplicant_scan_interval=15
-
-# Enable AAC 5.1 output
-PRODUCT_PROPERTY_OVERRIDES += \
-    media.aac_51_output_enabled=true
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    debug.egl.recordable.rgba8888=1
-
-PRODUCT_PROPERTY_OVERRIDES += \
-	ro.qualcomm.sensors.qmd=true \
-	ro.qc.sdk.sensors.gestures=true \
-	ro.qualcomm.sensors.pedometer=true \
-	ro.qualcomm.sensors.pam=true \
-	ro.qualcomm.sensors.scrn_ortn=true \
-	debug.qualcomm.sns.hal=1 \
-	debug.qualcomm.sns.daemon=1 \
-	debug.qualcomm.sns.libsensor1=e
-
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-	persist.sys.usb.config=mtp
-
 PRODUCT_PACKAGES += \
     lights.z
 
@@ -227,26 +168,8 @@ PRODUCT_COPY_FILES += \
 
 $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
 
-## These values are still too low and cause cache corruption. Use the hammerhead's
-#$(call inherit-product, frameworks/native/build/phone-xxhdpi-2048-hwui-memory.mk)
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.hwui.texture_cache_size=72 \
-    ro.hwui.layer_cache_size=48 \
-    ro.hwui.r_buffer_cache_size=8 \
-    ro.hwui.path_cache_size=32 \
-    ro.hwui.gradient_cache_size=1 \
-    ro.hwui.drop_shadow_cache_size=6 \
-    ro.hwui.texture_cache_flushrate=0.4 \
-    ro.hwui.text_small_cache_width=1024 \
-    ro.hwui.text_small_cache_height=1024 \
-    ro.hwui.text_large_cache_width=2048 \
-    ro.hwui.text_large_cache_height=1024
+$(call inherit-product, frameworks/native/build/phone-xxhdpi-2048-hwui-memory.mk)
 
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.extension_library=/vendor/lib/libqc-opt.so
-
-# Disregard the firmware, go straight for the confs...
-#$(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4335/device-bcm.mk)
 $(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/config/config-bcm.mk)
 
 $(call inherit-product-if-exists, hardware/qcom/msm8x74/msm8x74.mk)

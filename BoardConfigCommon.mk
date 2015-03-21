@@ -34,13 +34,13 @@ TARGET_BOARD_PLATFORM_GPU := qcom-adreno330
 
 # Kernel information
 BOARD_KERNEL_BASE     := 0x00000000
-BOARD_KERNEL_CMDLINE := := console=ttyHSL0,115200,n8 androidboot.hardware=z user_debug=31 msm_rtb.filter=0x0 androidboot.selinux=permissive
+BOARD_KERNEL_CMDLINE := := console=ttyHSL0,115200,n8 androidboot.hardware=z androidboot.bootdevice=msm_sdcc.1 user_debug=31 msm_rtb.filter=0x0 androidboot.selinux=permissive
 BOARD_MKBOOTIMG_ARGS  := --ramdisk_offset 0x05000000 --tags_offset 0x04800000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_SEPARATED_DT := true
 BOARD_CUSTOM_BOOTIMG := true
-BOARD_CUSTOM_BOOTIMG_MK := device/lge/z-common/mkbootimg.mk
-TARGET_KERNEL_SOURCE := kernel/lge/zee
+BOARD_CUSTOM_BOOTIMG_MK := device/lge/z-common/releasetools/mkbootimg.mk
+TARGET_KERNEL_SOURCE := kernel/lge/z
 TARGET_REQUIRES_BUMP := true
 
 BOARD_WPA_SUPPLICANT_DRIVER := NL80211
@@ -64,13 +64,7 @@ OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
 
 #BOARD_USES_QCOM_HARDWARE := true
 COMMON_GLOBAL_CFLAGS += -DLG_CAMERA_HARDWARE -DLPA_DEFAULT_BUFFER_SIZE=512
-#-DQCOM_BSP -DQCOM_HARDWARE
 TARGET_DISPLAY_USE_RETIRE_FENCE := true
-
-TARGET_QCOM_DISPLAY_VARIANT := caf
-
-# Media 
-TARGET_QCOM_MEDIA_VARIANT := caf
 
 # Camera
 USE_DEVICE_SPECIFIC_CAMERA := true
@@ -85,7 +79,7 @@ AUDIO_FEATURE_DYNAMIC_VOLUME_MIXER := true
 
 ## Recovery
 RECOVERY_FSTAB_VERSION = 2
-TARGET_RECOVERY_FSTAB = device/lge/z-common/ramdisk/fstab.z
+TARGET_RECOVERY_FSTAB = device/lge/z-common/rootdir/etc/fstab.z
 BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_15x24.h\"
 #ENABLE_LOKI_RECOVERY := true
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
