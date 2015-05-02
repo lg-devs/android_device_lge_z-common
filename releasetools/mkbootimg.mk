@@ -1,7 +1,7 @@
 LOCAL_PATH := $(call my-dir)
 
 ## Build and run dtbtool
-BUMP := $(LOCAL_PATH)/releasetools/bump.py
+BUMP := $(LOCAL_PATH)/open_bump.py
 DTBTOOL := $(HOST_OUT_EXECUTABLES)/dtbToolCM$(HOST_EXECUTABLE_SUFFIX)
 INSTALLED_DTIMAGE_TARGET := $(PRODUCT_OUT)/dt.img
 
