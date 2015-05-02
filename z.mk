@@ -15,7 +15,7 @@
 #
 
 # Call common vendor
-$(call inherit-product-if-exists, vendor/lge/z-common/z-common-vendor.mk)
+$(call inherit-product-if-exists, vendor/lge/d959/d959-vendor.mk)
 
 # Overlays
 DEVICE_PACKAGE_OVERLAYS := $(LOCAL_PATH)/overlay
