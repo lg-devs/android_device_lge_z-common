@@ -249,9 +249,6 @@
         <item>0</item>
     </integer-array>
 
-    <!-- Device supports LED flashlight -->
-    <bool name="config_enableTorch">true</bool>
-
     <!-- Disable lockscreen translucent decor by default -->
     <bool name="config_enableLockScreenTranslucentDecor">true</bool>
 
@@ -260,4 +257,22 @@
     <string name="config_perf_profile_default_entry">1</string>
 
     <bool name="config_lidControlsSleep">true</bool>
+   <!--integer-array name="config_smartCoverWindowCoords">
+        <item>55</item>
+        <item>200</item>
+        <item>850</item>
+        <item>880</item>
+    </integer-array-->
+
+    <!-- Enable the option to check proximity sensor when deciding whether to
+         turn the screen on
+         NOTE ! - Enable for devices that have a fast response proximity sensor
+    -->
+    <bool name="config_proximityCheckOnWake">true</bool>
+    <integer name="config_proximityCheckTimeout">400</integer>
+
+    <!--  Maximum number of supported users -->
+    <integer name="config_multiuserMaximumUsers">4</integer>
+    <!--  Whether Multiuser UI should be shown -->
+    <bool name="config_enableMultiUserUI">true</bool>
 </resources>
