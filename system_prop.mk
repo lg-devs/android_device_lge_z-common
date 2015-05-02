@@ -21,15 +21,14 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
 	persist.radio.apm_sim_not_pwdn=1 \
 	ro.telephony.call_ring.multiple=0 \
-	persist.radio.mode_pref_nv10=1 \
-    ro.telephony.ril_class=LgeLteRIL \
+        ro.telephony.ril_class=LgeLteRIL \
 	ro.telephony.ril.config=qcomdsds
 
 # Up to 3 layers can go through overlays
 PRODUCT_PROPERTY_OVERRIDES += persist.hwc.mdpcomp.enable=true
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-	rild.libpath=/system/vendor/lib/libril-qc-qmi-1.so
+	rild.libpath=/vendor/lib/libril-qc-qmi-1.so
 
 PRODUCT_PROPERTY_OVERRIDES += \
 	drm.service.enabled=true
